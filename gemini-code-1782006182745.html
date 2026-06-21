@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتب البروفيسور | Professor Office</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #111111;
+            --light-dark: #1A1A1A;
+            --white: #FFFFFF;
+            --gray: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--dark);
+            border-bottom: 2px solid var(--gold);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(17, 17, 17, 0.85), rgba(17, 17, 17, 0.85)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            color: var(--gold);
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            color: var(--white);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--gold);
+            font-size: 20px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 30px;
+            border-radius: 5px;
+            border: 1px solid var(--gold);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--gold);
+            font-size: 36px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 10px auto 0;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--light-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--dark);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .service-card h3 {
+            color: var(--gold);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--dark);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+            height: 250px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 17, 17, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h4 {
+            color: var(--gold);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-overlay p {
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-dark);
+        }
+
+        .contact-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--white);
+        }
+
+        .contact-info p span {
+            color: var(--gold);
+            margin-left: 15px;
+            font-weight: 700;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--dark);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: var(--light-dark);
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: var(--white);
+            font-size: 16px;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--gold);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--dark);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--gray);
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none; /* يمكن تطويرها لقائمة منسدلة مستقبلاً */
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">مكتب البروفيسور</a>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#portfolio">معرض الأعمال</a></li>
+                <li><a href="#contact">خدمة العملاء واتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>مكتب البروفيسور</h1>
+        <h2>استشارات وحلول متكاملة</h2>
+        <p>شريكك الموثوق لأصعب الأوقات</p>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">خدماتنا</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>استشارات قانونية</h3>
+                <p>تقديم الدعم والاستشارات القانونية الموثوقة لحماية حقوقك ومصالحك.</p>
+            </div>
+            <div class="service-card">
+                <h3>حل النزاعات</h3>
+                <p>إدارة وتسوية النزاعات المعقدة بحلول احترافية واستباقية.</p>
+            </div>
+            <div class="service-card">
+                <h3>استشارات إدارية واستراتيجية</h3>
+                <p>المساعدة في تخطيط وتوجيه الأعمال نحو النجاح بخطط مدروسة.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title">معرض الأعمال</h2>
+        <div class="portfolio-grid">
+            
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="تسوية نزاعات">
+                <div class="portfolio-overlay">
+                    <h4>تسوية نزاعات كبرى</h4>
+                    <p>نجاح في إدارة وتسوية قضايا تجارية معقدة.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" alt="استشارات قانونية">
+                <div class="portfolio-overlay">
+                    <h4>استشارات قانونية للشركات</h4>
+                    <p>توفير الغطاء القانوني وتأسيس الشركات.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="إدارة الأزمات">
+                <div class="portfolio-overlay">
+                    <h4>إدارة الأزمات الصعبة</h4>
+                    <p>تقديم حلول سريعة وفعالة في أصعب الأوقات.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">خدمة العملاء واتصل بنا</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <p><span>الهاتف:</span> +20 01121289441</p>
+                <p><span>البريد الإلكتروني:</span> Professor.office.eg@gmail.com</p>
+                <p><span>المقر الرئيسي:</span> مصر - القاهرة</p>
+            </div>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <input type="text" placeholder="اسمك الكريم" required>
+                    <input type="email" placeholder="بريدك الإلكتروني" required>
+                    <textarea rows="5" placeholder="كيف يمكننا مساعدتك اليوم؟" required></textarea>
+                    <button type="submit">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 - مكتب البروفيسور</p>
+    </footer>
+
+</body>
+</html>
